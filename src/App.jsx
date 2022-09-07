@@ -3,8 +3,8 @@ import {Col} from 'antd';
 import { useSelector,useDispatch } from 'react-redux';
 import Searcher from './components/Searcher';
 import PokemonList from './components/PokemonList';
-import {getPokemon,getPokemonDetails} from './api/index';
-import { setPokemons } from './actions';
+import {getPokemon,} from './api/index';
+import { getPokemonsWithDetails } from './actions';
 import logo from './static/logo.svg';
 import './App.css';
 
@@ -16,8 +16,7 @@ function App() {
   useEffect(()=>{
     const fetchPokemons = async()=>{
       const pokemonsRes = await getPokemon();
-      const pokemonsDetailed = await Promise.all(pokemonsRes.map(pokemon => getPokemonDetails(pokemon)));
-      dispatch(setPokemons(pokemonsDetailed))
+      dispatch(getPokemonsWithDetails(pokemonsRes))
     };
     fetchPokemons();
   },[])
