@@ -33,12 +33,5 @@ function App() {
     </div>
   )
 }
-const mapStateToProps = (state) => ({
-  pokemons: state.pokemons,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setPokemons: (value) => dispatch(setPokemonsActions(value)),
-});
 
 export default App;
