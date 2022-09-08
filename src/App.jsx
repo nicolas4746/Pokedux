@@ -3,25 +3,19 @@ import {Col,Spin} from 'antd';
 import { useSelector,useDispatch, shallowEqual } from 'react-redux';
 import Searcher from './components/Searcher';
 import PokemonList from './components/PokemonList';
-import {getPokemon,} from './api/index';
-import { getPokemonsWithDetails,setLoading } from './actions';
 import logo from './static/logo.svg';
 import './App.css';
+import { fetchPokemonsWithDetails } from './slices/dataSlice';
 
 function App() {
 
-  const  pokemons = useSelector(state => state.getIn([ 'data','pokemons'],shallowEqual)).toJS();//para convertirlo en un objeto plano y acceder a sus obj.prop por ej en popkemon list
-  const  loading = useSelector(state => state.get(['ui','loading']));
+  const  pokemons = useSelector((state) => state.data.pokemons, shallowEqual);
+    
+  const  loading = useSelector((state) => state.ui.loading);
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    const fetchPokemons = async()=>{
-      dispatch(setLoading(true));
-      const pokemonsRes = await getPokemon();
-      dispatch(getPokemonsWithDetails(pokemonsRes));
-      dispatch(setLoading(false));
-    };
-    fetchPokemons();
+    dispatch(fetchPokemonsWithDetails())
   },[])
 
   return (
