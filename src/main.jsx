@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
-import { pokemonsReducer } from './reducer/pokemons';
+import rootReducer from './reducer/rootReducer';
 import { Provider } from 'react-redux';
 import { 
   applyMiddleware,
@@ -19,7 +19,7 @@ const composedEnhancers =  composeAlt(
 )
 
 const store = createStore(
-  pokemonsReducer,
+  rootReducer,
   composedEnhancers
   );
 
