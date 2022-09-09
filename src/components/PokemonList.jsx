@@ -1,9 +1,19 @@
 import PokemonCard from './PokemonCard';
 import './PokemosList.css'
-const PokemonList = ({ pokemons }) => {
+import {useMemo} from 'react'
+
+const PokemonList = ({ pokemons, search }) => {
+
+  const filteredPokemons = useMemo(() =>
+      pokemons.filter((pokemon) => {
+        return pokemon.name.toLowerCase().includes(search.toLowerCase());
+      }),
+    [pokemons, search]
+  );
+
   return (
     <div className='PokemonList'>
-      {pokemons.map((pokemon) => {
+      {filteredPokemons.map((pokemon) => {
         return <PokemonCard 
         name={pokemon.name} 
         key={pokemon.name} 
