@@ -7,5 +7,5 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 600,
   },
-  base: '/Pokedux'
+  base: '/Pokedux/'
 })
